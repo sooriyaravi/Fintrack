@@ -1,45 +1,37 @@
+import 'package:finapp/login.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  bool _isPasswordVisible = false;
+class Signup extends StatelessWidget {
+  const Signup({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(top: 180),
+          padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(top: 180), // Increased top padding
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
-                "Sign in to your account",
+                "Create your account",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 5),
               const Text(
-                "Enter Your Email ID to Sign in",
+                "Enter your details to Sign Up",
                 style: TextStyle(fontSize: 14, color: Colors.grey),
               ),
               const SizedBox(height: 20),
 
-              // Email TextField
+              // Username TextField
               TextField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
                 cursorColor: Colors.black,
+                cursorWidth: 0.8, 
                 decoration: InputDecoration(
-                  hintText: "Enter Email ID",
-                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+                  hintText: "Enter Username",
+                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 14), 
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: const BorderSide(color: Colors.grey, width: 0.8),
@@ -54,14 +46,13 @@ class _LoginPageState extends State<LoginPage> {
 
               const SizedBox(height: 15),
 
-              // Password TextField with Visibility Toggle
+              // Email TextField
               TextField(
-                controller: _passwordController,
-                obscureText: !_isPasswordVisible,
                 cursorColor: Colors.black,
+                cursorWidth: 0.8, 
                 decoration: InputDecoration(
-                  hintText: "Enter password",
-                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+                  hintText: "Enter Email ID",
+                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 14), 
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: const BorderSide(color: Colors.grey, width: 0.8),
@@ -71,17 +62,28 @@ class _LoginPageState extends State<LoginPage> {
                     borderSide: const BorderSide(color: Colors.black, width: 1.2),
                   ),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                      color: Colors.grey,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      });
-                    },
+                ),
+              ),
+
+              const SizedBox(height: 15),
+
+              // Password TextField
+              TextField(
+                cursorColor: Colors.black,
+                cursorWidth: 0.8, 
+                obscureText: true, // Hide password input
+                decoration: InputDecoration(
+                  hintText: "Enter Password",
+                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 14), 
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.grey, width: 0.8),
                   ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.black, width: 1.2),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
                 ),
               ),
 
@@ -89,11 +91,7 @@ class _LoginPageState extends State<LoginPage> {
 
               // Continue Button
               ElevatedButton(
-                onPressed: () {
-                  String email = _emailController.text;
-                  String password = _passwordController.text;
-                  print("Email: $email, Password: $password");
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
                   backgroundColor: Colors.black,
@@ -102,8 +100,32 @@ class _LoginPageState extends State<LoginPage> {
                 child: const Text("Continue", style: TextStyle(color: Colors.white)),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
+              RichText(
+                text: TextSpan(
+                  text: "Already have an account? ",
+                  style: const TextStyle(fontSize: 14, color: Colors.grey),
+                  children: [
+                    TextSpan(
+                      text: "Sign in",
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LoginPage()),
+                          );
+                        },
+                    ),
+                  ],
+                ),
+              ),
 
+              const SizedBox(height: 20),
               // OR Divider
               Row(
                 children: [
@@ -121,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
               // Google Sign-In Button
               TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: Colors.grey[300],
+                  backgroundColor: Colors.grey[300], 
                   minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
@@ -133,9 +155,6 @@ class _LoginPageState extends State<LoginPage> {
                       'assets/images/google.png',
                       width: 24,
                       height: 24,
-                      errorBuilder: (context, error, stackTrace) {
-                        return const Icon(Icons.error, color: Colors.red);
-                      },
                     ),
                     const SizedBox(width: 10),
                     const Text("Continue with Google", style: TextStyle(color: Colors.black)),
@@ -155,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                    MaterialPageRoute(builder: (context) => LoginPage()),
                   );
                 },
                 child: Row(
