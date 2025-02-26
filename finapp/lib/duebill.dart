@@ -1,49 +1,49 @@
+import 'package:finapp/dashboard.dart';
 import 'package:finapp/overview.dart';
-import 'package:flutter/material.dart';
-import 'package:finapp/duebill.dart';
 import 'package:finapp/paidbill.dart';
+import 'package:flutter/material.dart';
 
-class Unpaidbill extends StatefulWidget {
+class DueBills extends StatefulWidget {
   @override
-  _BillsScreenState createState() => _BillsScreenState();
+  _DueBillsState createState() => _DueBillsState();
 }
 
-class _BillsScreenState extends State<Unpaidbill> {
-  final List<Map<String, dynamic>> unpaidBills = [
+class _DueBillsState extends State<DueBills> {
+  final List<Map<String, dynamic>> dueBills = [
     {
       'name': 'NETFLIX',
       'amount': 'Rs.300',
-      'dueDate': '28-02-2025',
+      'dueDate': '25-02-2025',
       'icon': Icons.tv
     },
     {
       'name': 'ELECTRICITY',
-      'amount': 'Rs.300',
-      'dueDate': '02-03-2025',
+      'amount': 'Rs.500',
+      'dueDate': '01-03-2025',
       'icon': Icons.flash_on
     },
     {
       'name': 'AMAZON PRIME',
-      'amount': 'Rs.300',
-      'dueDate': '10-03-2025',
+      'amount': 'Rs.299',
+      'dueDate': '08-03-2025',
       'icon': Icons.shopping_cart
     },
     {
-      'name': 'NETFLIX',
-      'amount': 'Rs.300',
-      'dueDate': '18-03-2025',
-      'icon': Icons.tv
+      'name': 'SPOTIFY',
+      'amount': 'Rs.199',
+      'dueDate': '15-03-2025',
+      'icon': Icons.music_note
     },
     {
-      'name': 'NETFLIX',
-      'amount': 'Rs.300',
-      'dueDate': '29-03-2025',
-      'icon': Icons.tv
+      'name': 'INTERNET BILL',
+      'amount': 'Rs.700',
+      'dueDate': '20-03-2025',
+      'icon': Icons.wifi
     },
   ];
 
   String selectedFilter = "BILLS"; // Default selected filter
-  String selectedTab = "UNPAID"; // Default selected tab
+  String selectedTab = "DUE"; // Default to Due Tab
 
   @override
   Widget build(BuildContext context) {
@@ -84,15 +84,15 @@ class _BillsScreenState extends State<Unpaidbill> {
             SizedBox(height: 30),
             // Selected Tab Header
             Text(selectedTab,
-                style:
-                    TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    color: Colors.orange, fontWeight: FontWeight.bold)),
             SizedBox(height: 20),
-            // Unpaid Bills Section
+            // Due Bills Section
             Expanded(
               child: ListView.builder(
-                itemCount: unpaidBills.length,
+                itemCount: dueBills.length,
                 itemBuilder: (context, index) {
-                  return _buildBillCard(unpaidBills[index]);
+                  return _buildBillCard(dueBills[index]);
                 },
               ),
             ),
@@ -132,7 +132,7 @@ class _BillsScreenState extends State<Unpaidbill> {
     );
   }
 
-  // Function to build tab buttons with navigation
+  // Function to build tab buttons with dynamic selection
   Widget _buildTabButton(String title) {
     bool isSelected = selectedTab == title;
     return GestureDetector(
@@ -140,17 +140,16 @@ class _BillsScreenState extends State<Unpaidbill> {
         setState(() {
           selectedTab = title;
         });
-
         // Navigate to different screens based on the tab selected
         if (title == "PAID") {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Paidbill()),
           );
-        } else if (title == "DUE") {
+        } else if (title == "UNPAID") {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => DueBills()),
+            MaterialPageRoute(builder: (context) => Unpaidbill()),
           );
         }
       },
@@ -172,7 +171,7 @@ class _BillsScreenState extends State<Unpaidbill> {
     );
   }
 
-  // Function to build bill cards
+  // Function to build bill cards for DUE bills
   Widget _buildBillCard(Map<String, dynamic> bill) {
     return Card(
       elevation: 2,
@@ -180,17 +179,20 @@ class _BillsScreenState extends State<Unpaidbill> {
       margin: EdgeInsets.symmetric(vertical: 6),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: ListTile(
-        leading: Icon(bill['icon'], size: 20, color: Colors.red),
+        leading: Icon(Icons.warning,
+            size: 20, color: Colors.orange), // Due warning icon
         title: Text(
           bill['name'],
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 12, ),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(bill['amount'], style: TextStyle(fontSize: 12)),
-            Text("Before: ${bill['dueDate']}",
-                style: TextStyle(color: Colors.red, fontSize: 12)),
+            Text(bill['amount'],
+                style: TextStyle(fontSize: 12,)),
+            Text("Due on: ${bill['dueDate']}",
+                style: TextStyle(color: Colors.orange, fontSize: 12)),
           ],
         ),
         trailing: Icon(Icons.chevron_right, size: 30, color: Colors.grey),

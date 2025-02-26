@@ -1,3 +1,4 @@
+import 'package:finapp/bankloan.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -93,6 +94,10 @@ class _LoginPageState extends State<LoginPage> {
                   String email = _emailController.text;
                   String password = _passwordController.text;
                   print("Email: $email, Password: $password");
+                   Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => BankLoansScreen()),
+                          );
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
