@@ -1,3 +1,4 @@
+import 'package:finapp/bankloan.dart';
 import 'package:finapp/dashboard.dart';
 import 'package:finapp/overview.dart';
 import 'package:finapp/paidbill.dart';
@@ -9,6 +10,7 @@ class DueBills extends StatefulWidget {
 }
 
 class _DueBillsState extends State<DueBills> {
+   final List<String> _tabs = ["BANKS & LOANS", "OVERVIEW", "SPENT", "SAVINGS", "BILLS"];
   final List<Map<String, dynamic>> dueBills = [
     {
       'name': 'NETFLIX',
@@ -60,25 +62,19 @@ class _DueBillsState extends State<DueBills> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Filter buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildFilterButton("BILLS"),
-                _buildFilterButton("OVERVIEW"),
-                _buildFilterButton("SPENT"),
-                _buildFilterButton("SAVINGS"),
-              ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: _tabs.map((tab) => _buildFilterButton(tab)).toList(),
+              ),
             ),
             SizedBox(height: 20),
             // Centered Tabs for Unpaid, Paid, Due
             Center(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                children: [
-                  _buildTabButton("UNPAID"),
-                  _buildTabButton("PAID"),
-                  _buildTabButton("DUE"),
-                ],
+                children: ["UNPAID", "PAID", "DUE"].map((tab) => _buildTabButton(tab)).toList(),
+
               ),
             ),
             SizedBox(height: 30),
@@ -116,8 +112,15 @@ class _DueBillsState extends State<DueBills> {
             MaterialPageRoute(builder: (context) => OverviewPage()),
           );
         }
+        else if (title == "BANKS & LOANS") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => BankLoansScreen()),
+          );
+        }
       },
       child: Container(
+        margin: EdgeInsets.only(right: 12),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
           color: isSelected ? Colors.black : Colors.grey[300],

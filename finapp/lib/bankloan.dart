@@ -10,9 +10,9 @@ class BankLoansScreen extends StatefulWidget {
 }
 
 class _BankLoansScreenState extends State<BankLoansScreen> {
-  int _selectedTabIndex = 2; // Default selected tab (BANKS & LOANS)
+  int _selectedTabIndex = 0; // Default selected tab (BANKS & LOANS)
 
-  final List<String> _tabs = ["SPENT", "SAVINGS", "BANKS & LOANS", "BILLS"];
+  final List<String> _tabs = ["BANKS & LOANS", "OVERVIEW","SPENT", "SAVINGS", "BILLS"];
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +126,12 @@ class _BankLoansScreenState extends State<BankLoansScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Unpaidbill()),
+          );
+        }
+        else if (text == "OVERVIEW") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => OverviewPage()),
           );
         }
           

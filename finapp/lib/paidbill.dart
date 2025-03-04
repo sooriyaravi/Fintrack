@@ -1,3 +1,4 @@
+import 'package:finapp/bankloan.dart';
 import 'package:finapp/dashboard.dart';
 import 'package:finapp/duebill.dart';
 import 'package:finapp/overview.dart';
@@ -9,6 +10,7 @@ class Paidbill extends StatefulWidget {
 }
 
 class _BillsScreenState extends State<Paidbill> {
+  final List<String> _tabs = ["BANKS & LOANS", "OVERVIEW", "SPENT", "SAVINGS", "BILLS"];
   final List<Map<String, dynamic>> paidBills = [
     {'name': 'NETFLIX', 'amount': 'Rs.300', 'paidDate': '25-02-2025', 'icon': Icons.tv},
     {'name': 'ELECTRICITY', 'amount': 'Rs.500', 'paidDate': '01-03-2025', 'icon': Icons.flash_on},
@@ -34,24 +36,17 @@ class _BillsScreenState extends State<Paidbill> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildFilterButton("BILLS"),
-                _buildFilterButton("OVERVIEW"),
-                _buildFilterButton("SPENT"),
-                _buildFilterButton("SAVINGS"),
-              ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: _tabs.map((tab) => _buildFilterButton(tab)).toList(),
+              ),
             ),
             SizedBox(height: 20),
             Center(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                children: [
-                  _buildTabButton("UNPAID"),
-                  _buildTabButton("PAID"),
-                  _buildTabButton("DUE"),
-                ],
+                children: ["UNPAID", "PAID", "DUE"].map((tab) => _buildTabButton(tab)).toList(),
               ),
             ),
             SizedBox(height: 30),
@@ -83,8 +78,16 @@ class _BillsScreenState extends State<Paidbill> {
             context,
             MaterialPageRoute(builder: (context) => OverviewPage()),
           );
-      }},
+        }
+        else if (title == "BANKS & LOANS") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => BankLoansScreen()),
+          );
+        }
+      },
       child: Container(
+        margin: EdgeInsets.only(right: 12),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
           color: isSelected ? Colors.black : Colors.grey[300],
@@ -105,15 +108,18 @@ class _BillsScreenState extends State<Paidbill> {
         setState(() {
           selectedTab = title;
         });
-        if (title == "UNPAID") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Unpaidbill()),
-          );
-        } else if (title == "DUE") {
+        if (title == "DUE") {
+          // Navigate 
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => DueBills()),
+          );
+        }
+           else if (title == "UNPAID") {
+          // Navigate to the BillScreen when "BILLS" is tapped
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Unpaidbill()),
           );
         }
       },
@@ -136,9 +142,8 @@ class _BillsScreenState extends State<Paidbill> {
 
   Widget _buildBillCard(Map<String, dynamic> bill) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.9, // Reduced width
+      width: MediaQuery.of(context).size.width * 0.9,
       decoration: BoxDecoration(
-        border: selectedTab == "DUE" ? Border.all(color: Colors.red, width: 2) : null,
         borderRadius: BorderRadius.circular(10),
       ),
       margin: EdgeInsets.symmetric(vertical: 6),
@@ -150,12 +155,12 @@ class _BillsScreenState extends State<Paidbill> {
           leading: Icon(Icons.check_circle, size: 20, color: Colors.green),
           title: Text(
             bill['name'],
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, ),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
           ),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(bill['amount'], style: TextStyle(fontSize: 12,)),
+              Text(bill['amount'], style: TextStyle(fontSize: 12)),
               Text("Paid on: ${bill['paidDate']}", style: TextStyle(color: Colors.green, fontSize: 12)),
             ],
           ),
@@ -164,4 +169,4 @@ class _BillsScreenState extends State<Paidbill> {
       ),
     );
   }
-}
+} 

@@ -3,6 +3,7 @@ import 'package:finapp/bankloan.dart';
 //import 'package:finapp/paidbill.dart';
 import 'package:finapp/dashboard.dart';
 import 'package:finapp/overview.dart';
+import 'package:finapp/savings.dart';
 import 'package:finapp/signup.dart';
 //import 'package:finapp/signup.dart';
 //import 'package:finapp/overview.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(debugShowCheckedModeBanner: false,
-      home: Signup() 
+      home: OverviewPage() 
       );
   }
 }

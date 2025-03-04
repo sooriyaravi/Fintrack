@@ -1,5 +1,5 @@
+import 'package:finapp/bankloan.dart';
 import 'package:finapp/dashboard.dart';
-import 'package:finapp/paidbill.dart';
 import 'package:flutter/material.dart';
 
 class OverviewPage extends StatelessWidget {
@@ -59,10 +59,11 @@ class OverviewPage extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
+          buildTab(context, 'BANKS & LOANS', false, null),
           buildTab(context, 'OVERVIEW', true, null),
-          buildTab(context, 'BILLS', false, null),
           buildTab(context, 'SPENT', false, null),
           buildTab(context, 'SAVINGS', false, null),
+          buildTab(context, 'BILLS', false, null),
         ],
       ),
     );
@@ -76,6 +77,12 @@ class OverviewPage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Unpaidbill()),
+          );
+        }
+         else if (text == "BANKS & LOANS") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => BankLoansScreen()),
           );
         }
       },
