@@ -1,3 +1,5 @@
+import 'package:finapp/loanterm.dart';
+import 'package:finapp/profile.dart';
 import 'package:flutter/material.dart';
 
 
@@ -50,12 +52,18 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       backgroundColor: Colors.green.shade50,
       appBar: AppBar(
-        backgroundColor: Colors.green.shade700,
+        backgroundColor: Color(0xFF21471E),
         title: Text("Indian Bank", style: TextStyle(color: Colors.white)),
         actions: [
-          IconButton(icon: Icon(Icons.lightbulb, color: Colors.white), onPressed: () {})
+          IconButton(icon: Icon(Icons.lightbulb, color: Colors.white), onPressed: () {
+            Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LoanTermsPage()),
+                          );
+          })
         ],
       ),
+       drawer: _buildDrawer(context), 
       body: Column(
         children: [
           Expanded(
@@ -88,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
                 SizedBox(width: 8),
                 FloatingActionButton(
-                  backgroundColor: Colors.green.shade700,
+                  backgroundColor: Color(0xFF21471E),
                   child: Icon(Icons.send, color: Colors.white),
                   onPressed: _sendMessage,
                 )
@@ -100,3 +108,53 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
+// **Drawer Function**
+  Widget _buildDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          // Drawer Header
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Color(0xFF21471E), // Theme Color
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: Colors.white,
+                  child: Icon(Icons.person, size: 40, color: Color(0xFF21471E)),
+                ),
+                SizedBox(height: 10),
+                Text("User Name", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w400)),
+                Text("useremail@example.com", style: TextStyle(color: Colors.white70, fontSize: 14)),
+              ],
+            ),
+          ),
+
+          // Drawer Items
+_buildDrawerItem(Icons.person, "Profile", () {
+             Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ProfilePage()),
+          );
+          }),          _buildDrawerItem(Icons.settings, "Settings", () {}),
+          _buildDrawerItem(Icons.info, "About", () {}),
+          _buildDrawerItem(Icons.help, "Help & Support", () {}),
+          Divider(), // Line Separator
+          _buildDrawerItem(Icons.logout, "Logout", () {}),
+        ],
+      ),
+    );
+  }
+
+  /// **Reusable Drawer Item**
+  Widget _buildDrawerItem(IconData icon, String title, VoidCallback onTap) {
+    return ListTile(
+      leading: Icon(icon, color: Color(0xFF21471E)),
+      title: Text(title, style: TextStyle(fontWeight: FontWeight.w400, color: Colors.black87)),
+      onTap: onTap,
+    );
+  }

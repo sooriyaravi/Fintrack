@@ -1,8 +1,8 @@
+import 'package:finapp/bankloan.dart';
 import 'package:finapp/emireduction.dart';
+import 'package:finapp/profile.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-
-
 
 class LoanTermsPage extends StatefulWidget {
   @override
@@ -35,16 +35,21 @@ class _LoanTermsPageState extends State<LoanTermsPage> {
     double savings = totalInterestBefore - totalInterestAfter;
 
     return Scaffold(
-       backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
-         backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         title: Text("LOAN TERMS", style: TextStyle(color: Color(0xFF21471E))),
         centerTitle: true,
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.person, color: Color(0xFF21471E)))],
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu, color: Color(0xFF21471E))),
-    
+        actions: [IconButton(onPressed: () {
+          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => BankLoansScreen()),
+                          );
+        }, icon: Icon(Icons.person, color: Color(0xFF21471E)))],
         iconTheme: IconThemeData(color: Color(0xFF21471E)),
       ),
+           drawer: _buildDrawer(context), // Calling the drawer function
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -58,18 +63,18 @@ class _LoanTermsPageState extends State<LoanTermsPage> {
                     setState(() {
                       isInterestReduction = true;
                       Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => LoanTermsPage()),
-                          );
+                        context,
+                        MaterialPageRoute(builder: (context) => LoanTermsPage()),
+                      );
                     });
                   }),
                   _buildToggleButton("EMI Reduction", !isInterestReduction, () {
                     setState(() {
                       isInterestReduction = false;
                       Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => EmiReductionPage()),
-                          );
+                        context,
+                        MaterialPageRoute(builder: (context) => EmiReductionPage()),
+                      );
                     });
                   }),
                 ],
@@ -118,7 +123,7 @@ class _LoanTermsPageState extends State<LoanTermsPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF21471E))),
+        Text(title, style: TextStyle(fontWeight: FontWeight.w400, color: Color(0xFF21471E))),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -156,9 +161,63 @@ class _LoanTermsPageState extends State<LoanTermsPage> {
       children: values
           .map((text) => Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text(text, style: TextStyle(fontWeight: isHeader ? FontWeight.bold : FontWeight.normal, color: Color(0xFF21471E))),
+                child: Text(
+                  text,
+                  style: TextStyle(fontWeight: isHeader ? FontWeight.w400 : FontWeight.normal, color: Color(0xFF21471E)),
+                ),
               ))
           .toList(),
     );
   }
 }
+/// **Drawer Function**
+  Widget _buildDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          // Drawer Header
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Color(0xFF21471E), // Theme Color
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: Colors.white,
+                  child: Icon(Icons.person, size: 40, color: Color(0xFF21471E)),
+                ),
+                SizedBox(height: 10),
+                Text("User Name", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w400)),
+                Text("useremail@example.com", style: TextStyle(color: Colors.white70, fontSize: 14)),
+              ],
+            ),
+          ),
+
+          // Drawer Items
+          _buildDrawerItem(Icons.person, "Profile", () {
+             Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ProfilePage()),
+          );
+          }),
+          _buildDrawerItem(Icons.settings, "Settings", () {}),
+          _buildDrawerItem(Icons.info, "About", () {}),
+          _buildDrawerItem(Icons.help, "Help & Support", () {}),
+          Divider(), // Line Separator
+          _buildDrawerItem(Icons.logout, "Logout", () {}),
+        ],
+      ),
+    );
+  }
+
+  /// **Reusable Drawer Item**
+  Widget _buildDrawerItem(IconData icon, String title, VoidCallback onTap) {
+    return ListTile(
+      leading: Icon(icon, color: Color(0xFF21471E)),
+      title: Text(title, style: TextStyle(fontWeight: FontWeight.w400, color: Colors.black87)),
+      onTap: onTap,
+    );
+  }
