@@ -52,7 +52,7 @@ class _BillsScreenState extends State<Unpaidbill> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("BILLS", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text("BILLS", style: TextStyle(fontWeight: FontWeight.w400)),
         centerTitle: true,
         leading: Icon(Icons.menu),
         actions: [Icon(Icons.person)],
@@ -82,7 +82,7 @@ class _BillsScreenState extends State<Unpaidbill> {
             // Selected Tab Header
             Text(selectedTab,
                 style:
-                    TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                    TextStyle(color: Colors.red, fontWeight: FontWeight.w400)),
             SizedBox(height: 20),
             // Unpaid Bills Section
             Expanded(
@@ -125,13 +125,13 @@ class _BillsScreenState extends State<Unpaidbill> {
          margin: EdgeInsets.only(right: 12),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.black : Colors.grey[300],
+          color: isSelected ? Color(0xFF21471E) : Colors.grey[300],
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
           title,
           style: TextStyle(
-              color: isSelected ? Colors.white : Colors.black, fontSize: 12),
+              color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
         ),
       ),
     );
@@ -164,13 +164,13 @@ class _BillsScreenState extends State<Unpaidbill> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: isSelected ? Colors.black : Colors.grey[300],
+            color: isSelected ? Color(0xFF21471E) : Colors.grey[300],
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
             title,
             style: TextStyle(
-                color: isSelected ? Colors.white : Colors.black, fontSize: 12),
+                color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
           ),
         ),
       ),

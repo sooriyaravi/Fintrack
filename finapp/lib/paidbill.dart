@@ -1,5 +1,5 @@
 import 'package:finapp/bankloan.dart';
-import 'package:finapp/dashboard.dart';
+import 'package:finapp/unpaidbill.dart';
 import 'package:finapp/duebill.dart';
 import 'package:finapp/overview.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class _BillsScreenState extends State<Paidbill> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("BILLS", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text("BILLS", style: TextStyle(fontWeight: FontWeight.w400)),
         centerTitle: true,
         leading: Icon(Icons.menu),
         actions: [Icon(Icons.person)],
@@ -50,7 +50,7 @@ class _BillsScreenState extends State<Paidbill> {
               ),
             ),
             SizedBox(height: 30),
-            Text(selectedTab, style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+            Text(selectedTab, style: TextStyle(color: Color(0xFF21471E), fontWeight: FontWeight.w400)),
             SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
@@ -90,12 +90,12 @@ class _BillsScreenState extends State<Paidbill> {
         margin: EdgeInsets.only(right: 12),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.black : Colors.grey[300],
+          color: isSelected ? Color(0xFF21471E) : Colors.grey[300],
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
           title,
-          style: TextStyle(color: isSelected ? Colors.white : Colors.black, fontSize: 12),
+          style: TextStyle(color: isSelected ? Colors.white :Color(0xFF21471E), fontSize: 12),
         ),
       ),
     );
@@ -128,12 +128,12 @@ class _BillsScreenState extends State<Paidbill> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: isSelected ? Colors.black : Colors.grey[300],
+            color: isSelected ? Color(0xFF21471E) : Colors.grey[300],
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
             title,
-            style: TextStyle(color: isSelected ? Colors.white : Colors.black, fontSize: 12),
+            style: TextStyle(color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
           ),
         ),
       ),
@@ -152,7 +152,7 @@ class _BillsScreenState extends State<Paidbill> {
         color: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: ListTile(
-          leading: Icon(Icons.check_circle, size: 20, color: Colors.green),
+          leading: Icon(Icons.check_circle, size: 20, color: Color(0xFF21471E)),
           title: Text(
             bill['name'],
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
@@ -161,7 +161,7 @@ class _BillsScreenState extends State<Paidbill> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(bill['amount'], style: TextStyle(fontSize: 12)),
-              Text("Paid on: ${bill['paidDate']}", style: TextStyle(color: Colors.green, fontSize: 12)),
+              Text("Paid on: ${bill['paidDate']}", style: TextStyle(color: Color(0xFF21471E), fontSize: 12)),
             ],
           ),
           trailing: Icon(Icons.chevron_right, size: 30, color: Colors.grey),

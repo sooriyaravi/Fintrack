@@ -16,40 +16,48 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+             backgroundColor: Color.fromARGB(255, 255, 255, 255),
+
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(top: 180),
+          padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(top: 100),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+               const Text(
+                  "FINTRACK",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: Color(0xFF21471E)),
+                ),
+                const SizedBox(height: 20),
               const Text(
                 "Sign in to your account",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF21471E)),
               ),
               const SizedBox(height: 5),
-              const Text(
-                "Enter Your Email ID to Sign in",
-                style: TextStyle(fontSize: 14, color: Colors.grey),
-              ),
+              Text(
+                 "Enter Your Email ID to Sign in",
+                 style: TextStyle(fontSize: 12, color: Color(0xFF21471E).withOpacity(0.7)),
+
+                ),
               const SizedBox(height: 20),
 
               // Email TextField
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                cursorColor: Colors.black,
+                cursorColor: Color(0xFF21471E),
                 decoration: InputDecoration(
                   hintText: "Enter Email ID",
-                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+                 hintStyle: TextStyle(color: Color(0xFF21471E).withOpacity(0.7), fontSize: 12),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.grey, width: 0.8),
+                    borderSide: const BorderSide(color: Color(0xFF21471E), width: 0.8),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.black, width: 1.2),
+                    borderSide: const BorderSide(color: Color(0xFF21471E), width: 1.2),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                 ),
               ),
 
@@ -59,23 +67,26 @@ class _LoginPageState extends State<LoginPage> {
               TextField(
                 controller: _passwordController,
                 obscureText: !_isPasswordVisible,
-                cursorColor: Colors.black,
+                keyboardType: TextInputType.visiblePassword,
+
+                cursorColor: Color(0xFF21471E),
                 decoration: InputDecoration(
                   hintText: "Enter password",
-                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+                 hintStyle: TextStyle(color: Color(0xFF21471E).withOpacity(0.7), fontSize: 12),
+
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.grey, width: 0.8),
+                    borderSide: const BorderSide(color: Color(0xFF21471E), width: 0.8),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.black, width: 1.2),
+                    borderSide: const BorderSide(color: Color(0xFF21471E), width: 1.2),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                      color: Colors.grey,
+                      color: Color(0xFF21471E),
                     ),
                     onPressed: () {
                       setState(() {
@@ -101,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
-                  backgroundColor: Colors.black,
+                  backgroundColor: Color(0xFF21471E),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
                 child: const Text("Continue", style: TextStyle(color: Colors.white)),
@@ -112,12 +123,12 @@ class _LoginPageState extends State<LoginPage> {
               // OR Divider
               Row(
                 children: [
-                  const Expanded(child: Divider(thickness: 1, color: Colors.grey)),
+                  const Expanded(child: Divider(thickness: 1, color: Color(0xFF21471E))),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text("or", style: TextStyle(color: Colors.grey)),
+                    child: Text("or", style: TextStyle(color: Color(0xFF21471E))),
                   ),
-                  const Expanded(child: Divider(thickness: 1, color: Colors.grey)),
+                  const Expanded(child: Divider(thickness: 1, color: Color(0xFF21471E))),
                 ],
               ),
 
@@ -128,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.grey[300],
                   minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),
                 onPressed: () {},
                 child: Row(
@@ -138,12 +149,9 @@ class _LoginPageState extends State<LoginPage> {
                       'assets/images/google.png',
                       width: 24,
                       height: 24,
-                      errorBuilder: (context, error, stackTrace) {
-                        return const Icon(Icons.error, color: Colors.red);
-                      },
                     ),
                     const SizedBox(width: 10),
-                    const Text("Continue with Google", style: TextStyle(color: Colors.black)),
+                    const Text("Continue with Google", style: TextStyle(color: Colors.black,fontSize:12 )),
                   ],
                 ),
               ),
@@ -155,34 +163,28 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.grey[300],
                   minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                  );
-                },
+                onPressed: () {},
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(Icons.apple, size: 24, color: Colors.black),
                     const SizedBox(width: 10),
-                    const Text("Continue with Apple", style: TextStyle(color: Colors.black)),
+                    const Text("Continue with Apple", style: TextStyle(color: Colors.black,fontSize: 12)),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
 
-              // Terms and Privacy Policy
-              const Text(
-                "By clicking continue, you agree to our Terms of Service and Privacy Policy",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.grey, fontSize: 12),
-              ),
+              // Privacy Policy Statement
+              Text(
+  "By continuing, you agree to our Terms of Service and Privacy Policy.",
+  style: TextStyle(fontSize: 10, color: Color(0xFF21471E).withOpacity(0.7)),
+  textAlign: TextAlign.center,
+),
 
-              const SizedBox(height: 30),
             ],
           ),
         ),

@@ -1,6 +1,7 @@
+import 'package:finapp/negotiation.dart';
 import 'package:finapp/overview.dart';
 import 'package:flutter/material.dart';
-import 'package:finapp/dashboard.dart';
+import 'package:finapp/unpaidbill.dart';
 
 class BankLoansScreen extends StatefulWidget {
   const BankLoansScreen({super.key});
@@ -17,17 +18,19 @@ class _BankLoansScreenState extends State<BankLoansScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    backgroundColor: Color.fromARGB(255, 255, 255, 255),
+
       appBar: AppBar(
-        backgroundColor: Colors.white,
+       backgroundColor: Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
-        leading: const Icon(Icons.menu, color: Colors.black),
+        leading: const Icon(Icons.menu, color: Color(0xFF21471E),),
         title: const Text(
           "BANKS & LOANS",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Color(0xFF21471E), fontWeight: FontWeight.w400),
         ),
         centerTitle: true,
         actions: const [
-          Icon(Icons.person, color: Colors.black),
+          Icon(Icons.person, color: Color(0xFF21471E)),
           SizedBox(width: 10),
         ],
       ),
@@ -48,38 +51,46 @@ class _BankLoansScreenState extends State<BankLoansScreen> {
 
             const SizedBox(height: 40),
 
-            // AI Negotiator Box
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(10),
+           GestureDetector(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Negotiation()), // Replace with your target page
+    );
+  },
+  child: Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: Colors.grey[200],
+      borderRadius: BorderRadius.circular(10),
+    ),
+    child: Row(
+      children: [
+        const Icon(Icons.account_balance, size: 30,color: Color(0xFF21471E),),
+        const SizedBox(width: 10),
+         Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Negotiate with Banks",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14,color: Color(0xFF21471E)),
               ),
-              child: Row(
-                children: [
-                  const Icon(Icons.account_balance, size: 30),
-                  const SizedBox(width: 10),
-                  const Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Negotiate with Banks",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                        ),
-                        Text(
-                          "With our AI Negotiator",
-                          style: TextStyle(color: Colors.grey, fontSize: 14),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Icon(Icons.arrow_forward_ios, size: 18),
-                ],
+              Text(
+                "With our AI Negotiator",
+                style: TextStyle(color: Color(0xFF21471E).withOpacity(0.7), fontSize: 14),
               ),
-            ),
+            ],
+          ),
+        ),
+        const Icon(Icons.arrow_forward_ios, size: 18,color: Color(0xFF21471E),),
+      ],
+    ),
+  ),
+),
 
-            const SizedBox(height: 30),
+
+             const SizedBox(height: 30),
 
             // Similar Offers List
             const Text(
@@ -136,19 +147,18 @@ class _BankLoansScreenState extends State<BankLoansScreen> {
         }
           
       },
-      child: Container(
-        margin: const EdgeInsets.only(right: 10),
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-        decoration: BoxDecoration(
-          color: isSelected ? Colors.black : Colors.grey[300],
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Text(
-          text,
-          style: TextStyle(
-            color: isSelected ? Colors.white : Colors.black,
-            
-            fontSize: 12, // Set text size to 12
+     child: Padding(
+        padding: const EdgeInsets.only(right: 10.0),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            color: isSelected ? Color(0xFF21471E) : Colors.grey[300],
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Text(
+            text,
+            style: TextStyle(
+                color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
           ),
         ),
       ),
@@ -162,6 +172,7 @@ class _BankLoansScreenState extends State<BankLoansScreen> {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
+        
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
@@ -173,7 +184,7 @@ class _BankLoansScreenState extends State<BankLoansScreen> {
       ),
       child: Row(
         children: [
-          const Icon(Icons.account_balance, size: 30),
+          const Icon(Icons.account_balance, size: 30,color: Color(0xFF21471E),),
           const SizedBox(width: 10),
           Expanded(
             child: Column(
@@ -181,7 +192,7 @@ class _BankLoansScreenState extends State<BankLoansScreen> {
               children: [
                 Text(
                   bankName,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12,color: Color(0xFF21471E)),
                 ),
                 Text(
                   offerType,
@@ -196,7 +207,7 @@ class _BankLoansScreenState extends State<BankLoansScreen> {
           ),
           const Text(
             "View More",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12,color: Color(0xFF21471E)),
           ),
           const Icon(Icons.arrow_forward_ios, size: 16),
         ],

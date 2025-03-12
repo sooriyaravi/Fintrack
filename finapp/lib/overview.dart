@@ -1,23 +1,25 @@
 import 'package:finapp/bankloan.dart';
-import 'package:finapp/dashboard.dart';
+import 'package:finapp/unpaidbill.dart';
 import 'package:flutter/material.dart';
 
 class OverviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+              backgroundColor: Colors.white,
+
       appBar: AppBar(
         title: Text(
           'OVERVIEW',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Color(0xFF21471E), fontWeight: FontWeight.w400),
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: Color(0xFF21471E)),
         actions: [
           IconButton(
-              icon: Icon(Icons.person, color: Colors.black), onPressed: () {})
+              icon: Icon(Icons.person, color: Color(0xFF21471E)), onPressed: () {})
         ],
       ),
       drawer: Drawer(),
@@ -91,13 +93,13 @@ class OverviewPage extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: isSelected ? Colors.black : Colors.grey[300],
+            color: isSelected ? Color(0xFF21471E) : Colors.grey[300],
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
             text,
             style: TextStyle(
-                color: isSelected ? Colors.white : Colors.black, fontSize: 12),
+                color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
           ),
         ),
       ),
@@ -119,7 +121,7 @@ class OverviewPage extends StatelessWidget {
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.green),
+                  color: Color(0xFF21471E)),
             ),
             SizedBox(height: 8),
             Text('100/700',
@@ -151,7 +153,7 @@ class OverviewPage extends StatelessWidget {
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 Text('View More →',
-                    style: TextStyle(color: Colors.green, fontSize: 10))
+                    style: TextStyle(color: Color(0xFF21471E), fontSize: 10))
               ],
             ),
             SizedBox(height: 8),
@@ -184,7 +186,7 @@ class OverviewPage extends StatelessWidget {
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 Text('View More →',
-                    style: TextStyle(color: Colors.green, fontSize: 10))
+                    style: TextStyle(color: Color(0xFF21471E), fontSize: 10))
               ],
             ),
             SizedBox(height: 8),

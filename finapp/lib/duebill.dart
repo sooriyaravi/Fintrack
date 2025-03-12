@@ -1,5 +1,5 @@
 import 'package:finapp/bankloan.dart';
-import 'package:finapp/dashboard.dart';
+import 'package:finapp/unpaidbill.dart';
 import 'package:finapp/overview.dart';
 import 'package:finapp/paidbill.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +51,7 @@ class _DueBillsState extends State<DueBills> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("BILLS", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text("BILLS", style: TextStyle(fontWeight: FontWeight.w400,color: Color(0xFF21471E))),
         centerTitle: true,
         leading: Icon(Icons.menu),
         actions: [Icon(Icons.person)],
@@ -123,13 +123,13 @@ class _DueBillsState extends State<DueBills> {
         margin: EdgeInsets.only(right: 12),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.black : Colors.grey[300],
+          color: isSelected ? Color(0xFF21471E) : Colors.grey[300],
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
           title,
           style: TextStyle(
-              color: isSelected ? Colors.white : Colors.black, fontSize: 12),
+              color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
         ),
       ),
     );
@@ -161,13 +161,13 @@ class _DueBillsState extends State<DueBills> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: isSelected ? Colors.black : Colors.grey[300],
+            color: isSelected ? Color(0xFF21471E) : Colors.grey[300],
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
             title,
             style: TextStyle(
-                color: isSelected ? Colors.white : Colors.black, fontSize: 12),
+                color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
           ),
         ),
       ),

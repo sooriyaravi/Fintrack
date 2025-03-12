@@ -5,201 +5,173 @@ import 'package:flutter/material.dart';
 class Signup extends StatelessWidget {
   const Signup({super.key});
 
+  final Color primaryColor = const Color(0xFF21471E); // Define primary color
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(top: 180), // Increased top padding
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                "Create your account",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 5),
-              const Text(
-                "Enter your details to Sign Up",
-                style: TextStyle(fontSize: 14, color: Colors.grey),
-              ),
-              const SizedBox(height: 20),
+             backgroundColor: Color.fromARGB(255, 255, 255, 255),
 
-              // Username TextField
-              TextField(
-                cursorColor: Colors.black,
-                cursorWidth: 0.8, 
-                decoration: InputDecoration(
-                  hintText: "Enter Username",
-                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 14), 
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.grey, width: 0.8),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.black, width: 1.2),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+      resizeToAvoidBottomInset: true, // Prevents keyboard overflow issue
+      body: SafeArea(
+        child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag, // Dismiss keyboard on scroll
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 50),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "FINTRACK",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: primaryColor),
                 ),
-              ),
-
-              const SizedBox(height: 15),
-
-              // Email TextField
-              TextField(
-                cursorColor: Colors.black,
-                cursorWidth: 0.8, 
-                decoration: InputDecoration(
-                  hintText: "Enter Email ID",
-                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 14), 
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.grey, width: 0.8),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.black, width: 1.2),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+                const SizedBox(height: 20),
+                Text(
+                  "Create your account",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: primaryColor),
                 ),
-              ),
-
-              const SizedBox(height: 15),
-
-              // Password TextField
-              TextField(
-                cursorColor: Colors.black,
-                cursorWidth: 0.8, 
-                obscureText: true, // Hide password input
-                decoration: InputDecoration(
-                  hintText: "Enter Password",
-                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 14), 
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.grey, width: 0.8),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.black, width: 1.2),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+                const SizedBox(height: 5),
+                Text(
+                  "Enter your details to Sign Up",
+                  style: TextStyle(fontSize: 12, color: primaryColor.withOpacity(0.7)),
                 ),
-              ),
+                const SizedBox(height: 15),
 
-              const SizedBox(height: 15),
+                // Form Fields
+                _buildTextField("Enter Email ID",keyboardType: TextInputType.emailAddress),
+                const SizedBox(height: 10),
+                _buildTextField("Enter Phone Number",keyboardType: TextInputType.phone),
+                const SizedBox(height: 10),
+                _buildTextField("Enter Username",keyboardType: TextInputType.name),
+                const SizedBox(height: 10),
+                _buildTextField("Enter Password", obscureText: true),
+                const SizedBox(height: 10),
+                _buildTextField("Confirm Password", obscureText: true),
 
-              // Continue Button
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                  backgroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                const SizedBox(height: 12),
+
+                // Continue Button
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 40),
+                    backgroundColor: primaryColor,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  ),
+                  child: const Text("Continue", style: TextStyle(color: Colors.white, fontSize: 14)),
                 ),
-                child: const Text("Continue", style: TextStyle(color: Colors.white)),
-              ),
 
-              const SizedBox(height: 10),
-              RichText(
-                text: TextSpan(
-                  text: "Already have an account? ",
-                  style: const TextStyle(fontSize: 14, color: Colors.grey),
-                  children: [
-                    TextSpan(
-                      text: "Sign in",
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                const SizedBox(height: 8),
+
+                // Sign In Navigation
+                RichText(
+                  text: TextSpan(
+                    text: "Already have an account? ",
+                    style: TextStyle(fontSize: 12, color: primaryColor.withOpacity(0.7)),
+                    children: [
+                      TextSpan(
+                        text: "Sign in",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: primaryColor,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const LoginPage()),
+                            );
+                          },
                       ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => LoginPage()),
-                          );
-                        },
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 20),
-              // OR Divider
-              Row(
-                children: [
-                  const Expanded(child: Divider(thickness: 1, color: Colors.grey)),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text("or", style: TextStyle(color: Colors.grey)),
+                    ],
                   ),
-                  const Expanded(child: Divider(thickness: 1, color: Colors.grey)),
-                ],
-              ),
-
-              const SizedBox(height: 20),
-
-              // Google Sign-In Button
-              TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.grey[300], 
-                  minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
-                onPressed: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+
+                const SizedBox(height: 12),
+
+                // OR Divider
+                Row(
                   children: [
-                    Image.asset(
-                      'assets/images/google.png',
-                      width: 24,
-                      height: 24,
+                    Expanded(child: Divider(thickness: 0.8, color: primaryColor.withOpacity(0.7))),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 6),
+                      child: Text("or", style: TextStyle(color: primaryColor.withOpacity(0.7), fontSize: 12)),
                     ),
-                    const SizedBox(width: 10),
-                    const Text("Continue with Google", style: TextStyle(color: Colors.black)),
+                    Expanded(child: Divider(thickness: 0.8, color: primaryColor.withOpacity(0.7))),
                   ],
                 ),
-              ),
 
-              const SizedBox(height: 10),
+                const SizedBox(height: 12),
 
-              // Apple Sign-In Button
-              TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.grey[300],
-                  minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                // Social Login Buttons
+                _buildSocialButton("Continue with Google", "assets/images/google.png"),
+                const SizedBox(height: 8),
+                _buildSocialButton("Continue with Apple", null, icon: Icons.apple),
+
+                const SizedBox(height: 12),
+
+                // Terms and Privacy Policy
+                Text(
+                  "By clicking continue, you agree to our Terms of Service and Privacy Policy",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: primaryColor.withOpacity(0.7), fontSize: 10),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                  );
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.apple, size: 24, color: Colors.black),
-                    const SizedBox(width: 10),
-                    const Text("Continue with Apple", style: TextStyle(color: Colors.black)),
-                  ],
-                ),
-              ),
 
-              const SizedBox(height: 20),
-
-              // Terms and Privacy Policy
-              const Text(
-                "By clicking continue, you agree to our Terms of Service and Privacy Policy",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.grey, fontSize: 12),
-              ),
-
-              const SizedBox(height: 30),
-            ],
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
+      ),
+    );
+  }
+
+  // TextField Widget
+ Widget _buildTextField(String hint, {bool obscureText = false, TextInputType keyboardType = TextInputType.text}) {
+  return TextField(
+    cursorColor: primaryColor,
+    cursorWidth: 0.8,
+    obscureText: obscureText,
+    keyboardType: keyboardType, // Set keyboard type
+    style: TextStyle(fontSize: 12, color: primaryColor),
+    decoration: InputDecoration(
+      hintText: hint,
+      hintStyle: TextStyle(color: primaryColor.withOpacity(0.7), fontSize: 12),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: primaryColor, width: 0.6),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: primaryColor, width: 1.0),
+      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      
+    ),
+  );
+}
+
+
+  // Social Login Button Widget
+  Widget _buildSocialButton(String text, String? imagePath, {IconData? icon}) {
+    return TextButton(
+      style: TextButton.styleFrom(
+        backgroundColor: Colors.grey[300],
+        minimumSize: const Size(double.infinity, 40),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+      onPressed: () {},
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (imagePath != null)
+            Image.asset(imagePath, width: 20, height: 20)
+          else if (icon != null)
+            Icon(icon, size: 30, color: Colors.black),
+          const SizedBox(width: 6),
+          Text(text, style: const TextStyle(color: Colors.black, fontSize: 12)),
+        ],
       ),
     );
   }
