@@ -29,11 +29,9 @@ class _BillsScreenState extends State<Paidbill> {
       appBar: AppBar(
         title: Text("BILLS", style: TextStyle(fontWeight: FontWeight.w400)),
         centerTitle: true,
-       
         actions: [Icon(Icons.person)],
       ),
-          drawer: _buildDrawer(context), // Calling the drawer function
-
+      drawer: _buildDrawer(context), // Calling the drawer function
       body: Padding(
         padding: EdgeInsets.all(12.0),
         child: Column(
@@ -81,8 +79,7 @@ class _BillsScreenState extends State<Paidbill> {
             context,
             MaterialPageRoute(builder: (context) => OverviewPage()),
           );
-        }
-        else if (title == "BANKS & LOANS") {
+        } else if (title == "BANKS & LOANS") {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => BankLoansScreen()),
@@ -98,7 +95,7 @@ class _BillsScreenState extends State<Paidbill> {
         ),
         child: Text(
           title,
-          style: TextStyle(color: isSelected ? Colors.white :Color(0xFF21471E), fontSize: 12),
+          style: TextStyle(color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
         ),
       ),
     );
@@ -112,14 +109,11 @@ class _BillsScreenState extends State<Paidbill> {
           selectedTab = title;
         });
         if (title == "DUE") {
-          // Navigate 
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => DueBills()),
           );
-        }
-           else if (title == "UNPAID") {
-          // Navigate to the BillScreen when "BILLS" is tapped
+        } else if (title == "UNPAID") {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Unpaidbill()),
@@ -155,10 +149,10 @@ class _BillsScreenState extends State<Paidbill> {
         color: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: ListTile(
-          leading: Icon(Icons.check_circle, size: 20, color: Color(0xFF21471E)),
+          leading: Icon(Icons.check_circle, size: 20, color: Colors.green),
           title: Text(
             bill['name'],
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12), // Changed to w400
           ),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,7 +166,6 @@ class _BillsScreenState extends State<Paidbill> {
       ),
     );
   }
-} 
 
   /// **Drawer Function**
   Widget _buildDrawer(BuildContext context) {
@@ -202,10 +195,10 @@ class _BillsScreenState extends State<Paidbill> {
 
           // Drawer Items
           _buildDrawerItem(Icons.person, "Profile", () {
-             Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ProfilePage()),
-          );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            );
           }),
           _buildDrawerItem(Icons.settings, "Settings", () {}),
           _buildDrawerItem(Icons.info, "About", () {}),
@@ -225,3 +218,4 @@ class _BillsScreenState extends State<Paidbill> {
       onTap: onTap,
     );
   }
+}

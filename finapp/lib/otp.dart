@@ -1,10 +1,10 @@
+import 'package:finapp/bankloan.dart';
 import 'package:finapp/login.dart';
-import 'package:finapp/otp.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class Signup extends StatelessWidget {
-  const Signup({super.key});
+class Otppage extends StatelessWidget {
+  const Otppage({super.key});
 
   final Color primaryColor = const Color(0xFF21471E); // Define primary color
 
@@ -26,37 +26,31 @@ class Signup extends StatelessWidget {
                   "FINTRACK",
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: primaryColor),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 150),
                 Text(
-                  "Create your account",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: primaryColor),
+                  "Enter your OTP",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: primaryColor),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 25),
                 Text(
-                  "Enter your details to Sign Up",
+                  "The First half will be in your email and the other in your mobile",
+                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 12, color: primaryColor.withOpacity(0.7)),
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 25),
 
                 // Form Fields
-                _buildTextField("Enter Email ID",keyboardType: TextInputType.emailAddress),
-                const SizedBox(height: 10),
-                _buildTextField("Enter Phone Number",keyboardType: TextInputType.phone),
-                const SizedBox(height: 10),
-                _buildTextField("Enter Username",keyboardType: TextInputType.name),
-                const SizedBox(height: 10),
-                _buildTextField("Enter Password", obscureText: true),
-                const SizedBox(height: 10),
-                _buildTextField("Confirm Password", obscureText: true),
-
-                const SizedBox(height: 12),
+                _buildTextField("Enter your OTP",keyboardType: TextInputType.number),
+                const SizedBox(height: 30),
+                
+                
 
                 // Continue Button
                 ElevatedButton(
                   onPressed: () {
                       Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) =>  Otppage()),
+                              MaterialPageRoute(builder: (context) => BankLoansScreen()),
                             );
                   },
                   style: ElevatedButton.styleFrom(
@@ -69,55 +63,9 @@ class Signup extends StatelessWidget {
 
                 const SizedBox(height: 8),
 
-                // Sign In Navigation
-                RichText(
-                  text: TextSpan(
-                    text: "Already have an account? ",
-                    style: TextStyle(fontSize: 12, color: primaryColor.withOpacity(0.7)),
-                    children: [
-                      TextSpan(
-                        text: "Sign in",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: primaryColor,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const LoginPage()),
-                            );
-                          },
-                      ),
-                    ],
-                  ),
-                ),
+              
+               
 
-                const SizedBox(height: 12),
-
-                // OR Divider
-                Row(
-                  children: [
-                    Expanded(child: Divider(thickness: 0.8, color: primaryColor.withOpacity(0.7))),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 6),
-                      child: Text("or", style: TextStyle(color: primaryColor.withOpacity(0.7), fontSize: 12)),
-                    ),
-                    Expanded(child: Divider(thickness: 0.8, color: primaryColor.withOpacity(0.7))),
-                  ],
-                ),
-
-                const SizedBox(height: 12),
-
-                // Social Login Buttons
-                _buildSocialButton("Continue with Google", "assets/images/google.png"),
-                const SizedBox(height: 8),
-                _buildSocialButton("Continue with Apple", null, icon: Icons.apple),
-
-                const SizedBox(height: 12),
-
-                // Terms and Privacy Policy
                 Text(
                   "By clicking continue, you agree to our Terms of Service and Privacy Policy",
                   textAlign: TextAlign.center,
@@ -125,6 +73,8 @@ class Signup extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 20),
+                
+
               ],
             ),
           ),

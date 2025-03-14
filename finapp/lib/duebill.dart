@@ -11,7 +11,7 @@ class DueBills extends StatefulWidget {
 }
 
 class _DueBillsState extends State<DueBills> {
-   final List<String> _tabs = ["BANKS & LOANS", "OVERVIEW", "SPENT", "SAVINGS", "BILLS"];
+  final List<String> _tabs = ["BANKS & LOANS", "OVERVIEW", "SPENT", "SAVINGS", "BILLS"];
   final List<Map<String, dynamic>> dueBills = [
     {
       'name': 'NETFLIX',
@@ -52,13 +52,11 @@ class _DueBillsState extends State<DueBills> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("BILLS", style: TextStyle(fontWeight: FontWeight.w400,color: Color(0xFF21471E))),
+        title: Text("BILLS", style: TextStyle(fontWeight: FontWeight.w400, color: Color(0xFF21471E))),
         centerTitle: true,
-     
         actions: [Icon(Icons.person)],
       ),
-              drawer: _buildDrawer(context), // Calling the drawer function
-
+      drawer: _buildDrawer(context), // Calling the drawer function
       body: Padding(
         padding: EdgeInsets.all(12.0),
         child: Column(
@@ -77,14 +75,11 @@ class _DueBillsState extends State<DueBills> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: ["UNPAID", "PAID", "DUE"].map((tab) => _buildTabButton(tab)).toList(),
-
               ),
             ),
             SizedBox(height: 30),
             // Selected Tab Header
-            Text(selectedTab,
-                style: TextStyle(
-                    color: Colors.orange, fontWeight: FontWeight.bold)),
+            Text(selectedTab, style: TextStyle(color: Colors.orange, fontWeight: FontWeight.w400)),
             SizedBox(height: 20),
             // Due Bills Section
             Expanded(
@@ -110,16 +105,9 @@ class _DueBillsState extends State<DueBills> {
           selectedFilter = title;
         });
         if (title == "OVERVIEW") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => OverviewPage()),
-          );
-        }
-        else if (title == "BANKS & LOANS") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => BankLoansScreen()),
-          );
+          Navigator.push(context, MaterialPageRoute(builder: (context) => OverviewPage()));
+        } else if (title == "BANKS & LOANS") {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => BankLoansScreen()));
         }
       },
       child: Container(
@@ -131,8 +119,7 @@ class _DueBillsState extends State<DueBills> {
         ),
         child: Text(
           title,
-          style: TextStyle(
-              color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
+          style: TextStyle(color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
         ),
       ),
     );
@@ -148,15 +135,9 @@ class _DueBillsState extends State<DueBills> {
         });
         // Navigate to different screens based on the tab selected
         if (title == "PAID") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Paidbill()),
-          );
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Paidbill()));
         } else if (title == "UNPAID") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Unpaidbill()),
-          );
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Unpaidbill()));
         }
       },
       child: Padding(
@@ -169,8 +150,7 @@ class _DueBillsState extends State<DueBills> {
           ),
           child: Text(
             title,
-            style: TextStyle(
-                color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
+            style: TextStyle(color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
           ),
         ),
       ),
@@ -185,28 +165,24 @@ class _DueBillsState extends State<DueBills> {
       margin: EdgeInsets.symmetric(vertical: 6),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: ListTile(
-        leading: Icon(Icons.warning,
-            size: 20, color: Colors.orange), // Due warning icon
+        leading: Icon(Icons.warning, size: 20, color: Colors.orange), // Due warning icon
         title: Text(
           bill['name'],
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 12, ),
+          style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(bill['amount'],
-                style: TextStyle(fontSize: 12,)),
-            Text("Due on: ${bill['dueDate']}",
-                style: TextStyle(color: Colors.orange, fontSize: 12)),
+            Text(bill['amount'], style: TextStyle(fontSize: 12)),
+            Text("Due on: ${bill['dueDate']}", style: TextStyle(color: Colors.orange, fontSize: 12)),
           ],
         ),
         trailing: Icon(Icons.chevron_right, size: 30, color: Colors.grey),
       ),
     );
   }
-}
-/// **Drawer Function**
+
+  /// **Drawer Function**
   Widget _buildDrawer(BuildContext context) {
     return Drawer(
       child: ListView(
@@ -231,13 +207,9 @@ class _DueBillsState extends State<DueBills> {
               ],
             ),
           ),
-
           // Drawer Items
           _buildDrawerItem(Icons.person, "Profile", () {
-             Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ProfilePage()),
-          );
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
           }),
           _buildDrawerItem(Icons.settings, "Settings", () {}),
           _buildDrawerItem(Icons.info, "About", () {}),
@@ -257,3 +229,4 @@ class _DueBillsState extends State<DueBills> {
       onTap: onTap,
     );
   }
+}

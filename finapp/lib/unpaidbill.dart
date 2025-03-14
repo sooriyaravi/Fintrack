@@ -11,43 +11,18 @@ class Unpaidbill extends StatefulWidget {
 }
 
 class _BillsScreenState extends State<Unpaidbill> {
-    final List<String> _tabs = ["BANKS & LOANS", "OVERVIEW", "SPENT", "SAVINGS", "BILLS"];
+  final List<String> _tabs = ["BANKS & LOANS", "OVERVIEW", "SPENT", "SAVINGS", "BILLS"];
 
   final List<Map<String, dynamic>> unpaidBills = [
-    {
-      'name': 'NETFLIX',
-      'amount': 'Rs.300',
-      'dueDate': '28-02-2025',
-      'icon': Icons.tv
-    },
-    {
-      'name': 'ELECTRICITY',
-      'amount': 'Rs.300',
-      'dueDate': '02-03-2025',
-      'icon': Icons.flash_on
-    },
-    {
-      'name': 'AMAZON PRIME',
-      'amount': 'Rs.300',
-      'dueDate': '10-03-2025',
-      'icon': Icons.shopping_cart
-    },
-    {
-      'name': 'NETFLIX',
-      'amount': 'Rs.300',
-      'dueDate': '18-03-2025',
-      'icon': Icons.tv
-    },
-    {
-      'name': 'NETFLIX',
-      'amount': 'Rs.300',
-      'dueDate': '29-03-2025',
-      'icon': Icons.tv
-    },
+    {'name': 'NETFLIX', 'amount': 'Rs.300', 'dueDate': '28-02-2025', 'icon': Icons.tv},
+    {'name': 'ELECTRICITY', 'amount': 'Rs.300', 'dueDate': '02-03-2025', 'icon': Icons.flash_on},
+    {'name': 'AMAZON PRIME', 'amount': 'Rs.300', 'dueDate': '10-03-2025', 'icon': Icons.shopping_cart},
+    {'name': 'NETFLIX', 'amount': 'Rs.300', 'dueDate': '18-03-2025', 'icon': Icons.tv},
+    {'name': 'NETFLIX', 'amount': 'Rs.300', 'dueDate': '29-03-2025', 'icon': Icons.tv},
   ];
 
-  String selectedFilter = "BILLS"; // Default selected filter
-  String selectedTab = "UNPAID"; // Default selected tab
+  String selectedFilter = "BILLS";
+  String selectedTab = "UNPAID";
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +30,14 @@ class _BillsScreenState extends State<Unpaidbill> {
       appBar: AppBar(
         title: Text("BILLS", style: TextStyle(fontWeight: FontWeight.w400)),
         centerTitle: true,
-       
         actions: [Icon(Icons.person)],
       ),
-              drawer: _buildDrawer(context), // Calling the drawer function
-
+      drawer: _buildDrawer(context),
       body: Padding(
         padding: EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Filter buttons
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -73,21 +45,15 @@ class _BillsScreenState extends State<Unpaidbill> {
               ),
             ),
             SizedBox(height: 20),
-            // Centered Tabs for Unpaid, Paid, Due
             Center(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                                children: ["UNPAID", "PAID", "DUE"].map((tab) => _buildTabButton(tab)).toList(),
-
+                children: ["UNPAID", "PAID", "DUE"].map((tab) => _buildTabButton(tab)).toList(),
               ),
             ),
             SizedBox(height: 30),
-            // Selected Tab Header
-            Text(selectedTab,
-                style:
-                    TextStyle(color: Colors.red, fontWeight: FontWeight.w400)),
+            Text(selectedTab, style: TextStyle(color: Colors.red, fontWeight: FontWeight.w400)),
             SizedBox(height: 20),
-            // Unpaid Bills Section
             Expanded(
               child: ListView.builder(
                 itemCount: unpaidBills.length,
@@ -102,7 +68,6 @@ class _BillsScreenState extends State<Unpaidbill> {
     );
   }
 
-  // Function to build filter buttons with dynamic selection
   Widget _buildFilterButton(String title) {
     bool isSelected = selectedFilter == title;
     return GestureDetector(
@@ -111,21 +76,13 @@ class _BillsScreenState extends State<Unpaidbill> {
           selectedFilter = title;
         });
         if (title == "OVERVIEW") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => OverviewPage()),
-          );
+          Navigator.push(context, MaterialPageRoute(builder: (context) => OverviewPage()));
+        } else if (title == "BANKS & LOANS") {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => BankLoansScreen()));
         }
-        else if (title == "BANKS & LOANS") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => BankLoansScreen()),
-          );
-        }
-        
       },
       child: Container(
-         margin: EdgeInsets.only(right: 12),
+        margin: EdgeInsets.only(right: 12),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
           color: isSelected ? Color(0xFF21471E) : Colors.grey[300],
@@ -133,14 +90,12 @@ class _BillsScreenState extends State<Unpaidbill> {
         ),
         child: Text(
           title,
-          style: TextStyle(
-              color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
+          style: TextStyle(color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
         ),
       ),
     );
   }
 
-  // Function to build tab buttons with navigation
   Widget _buildTabButton(String title) {
     bool isSelected = selectedTab == title;
     return GestureDetector(
@@ -148,18 +103,10 @@ class _BillsScreenState extends State<Unpaidbill> {
         setState(() {
           selectedTab = title;
         });
-
-        // Navigate to different screens based on the tab selected
         if (title == "PAID") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Paidbill()),
-          );
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Paidbill()));
         } else if (title == "DUE") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => DueBills()),
-          );
+          Navigator.push(context, MaterialPageRoute(builder: (context) => DueBills()));
         }
       },
       child: Padding(
@@ -172,15 +119,13 @@ class _BillsScreenState extends State<Unpaidbill> {
           ),
           child: Text(
             title,
-            style: TextStyle(
-                color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
+            style: TextStyle(color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
           ),
         ),
       ),
     );
   }
 
-  // Function to build bill cards
   Widget _buildBillCard(Map<String, dynamic> bill) {
     return Card(
       elevation: 2,
@@ -189,34 +134,26 @@ class _BillsScreenState extends State<Unpaidbill> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: ListTile(
         leading: Icon(bill['icon'], size: 20, color: Colors.red),
-        title: Text(
-          bill['name'],
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-        ),
+        title: Text(bill['name'], style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12)),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(bill['amount'], style: TextStyle(fontSize: 12)),
-            Text("Before: ${bill['dueDate']}",
-                style: TextStyle(color: Colors.red, fontSize: 12)),
+            Text("Before: ${bill['dueDate']}", style: TextStyle(color: Colors.red, fontSize: 12)),
           ],
         ),
         trailing: Icon(Icons.chevron_right, size: 30, color: Colors.grey),
       ),
     );
   }
-}
-/// **Drawer Function**
+
   Widget _buildDrawer(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          // Drawer Header
           DrawerHeader(
-            decoration: BoxDecoration(
-              color: Color(0xFF21471E), // Theme Color
-            ),
+            decoration: BoxDecoration(color: Color(0xFF21471E)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -231,25 +168,19 @@ class _BillsScreenState extends State<Unpaidbill> {
               ],
             ),
           ),
-
-          // Drawer Items
-       _buildDrawerItem(Icons.person, "Profile", () {
-             Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ProfilePage()),
-          );
+          _buildDrawerItem(Icons.person, "Profile", () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
           }),
           _buildDrawerItem(Icons.settings, "Settings", () {}),
           _buildDrawerItem(Icons.info, "About", () {}),
           _buildDrawerItem(Icons.help, "Help & Support", () {}),
-          Divider(), // Line Separator
+          Divider(),
           _buildDrawerItem(Icons.logout, "Logout", () {}),
         ],
       ),
     );
   }
 
-  /// **Reusable Drawer Item**
   Widget _buildDrawerItem(IconData icon, String title, VoidCallback onTap) {
     return ListTile(
       leading: Icon(icon, color: Color(0xFF21471E)),
@@ -257,3 +188,4 @@ class _BillsScreenState extends State<Unpaidbill> {
       onTap: onTap,
     );
   }
+}

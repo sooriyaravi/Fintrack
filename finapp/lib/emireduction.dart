@@ -41,7 +41,7 @@ class _EmiReductionPageState extends State<EmiReductionPage> {
                     setState(() {
                       isemireduction = false;
                       Navigator.push(
-                        context,
+                        context, 
                         MaterialPageRoute(builder: (context) => LoanTermsPage()),
                       );
                     });

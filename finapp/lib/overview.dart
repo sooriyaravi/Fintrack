@@ -7,23 +7,25 @@ class OverviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-              backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
 
       appBar: AppBar(
         title: Text(
           'OVERVIEW',
-          style: TextStyle(color: Color(0xFF21471E), fontWeight: FontWeight.w400),
+          style: TextStyle(color: Color(0xFF2A5D27), fontWeight: FontWeight.w400),
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(color: Color(0xFF21471E)),
+        iconTheme: IconThemeData(color: Color(0xFF2A5D27)),
         actions: [
           IconButton(
-              icon: Icon(Icons.person, color: Color(0xFF21471E)), onPressed: () {})
+            icon: Icon(Icons.person, color: Color(0xFF2A5D27)),
+            onPressed: () {},
+          )
         ],
       ),
-           drawer: _buildDrawer(context), // Calling the drawer function
+      drawer: _buildDrawer(context), // Calling the drawer function
 
       body: SingleChildScrollView(
         child: Padding(
@@ -46,11 +48,9 @@ class OverviewPage extends StatelessWidget {
                 'Pending Distributions: \$5,000'
               ]),
               buildCard('Loan History', ['Loans Repaid: 3', 'Active Loans: 2']),
-              buildFinancialHealthCard(), // Updated financial health with a progress bar
-              buildCard(
-                  'Forecast Allocation', ['Available Reserves: \$20,000']),
-              buildCard('Key Payment Timeline',
-                  ['Payment 1 - Due Soon', 'Payment 2 - Paid']),
+              buildFinancialHealthCard(),
+              buildCard('Forecast Allocation', ['Available Reserves: \$20,000']),
+              buildCard('Key Payment Timeline', ['Payment 1 - Due Soon', 'Payment 2 - Paid']),
             ],
           ),
         ),
@@ -73,8 +73,7 @@ class OverviewPage extends StatelessWidget {
     );
   }
 
-  Widget buildTab(
-      BuildContext context, String text, bool isSelected, Widget? nextPage) {
+  Widget buildTab(BuildContext context, String text, bool isSelected, Widget? nextPage) {
     return GestureDetector(
       onTap: () {
         if (text == "BILLS") {
@@ -82,8 +81,7 @@ class OverviewPage extends StatelessWidget {
             context,
             MaterialPageRoute(builder: (context) => Unpaidbill()),
           );
-        }
-         else if (text == "BANKS & LOANS") {
+        } else if (text == "BANKS & LOANS") {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => BankLoansScreen()),
@@ -95,13 +93,13 @@ class OverviewPage extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: isSelected ? Color(0xFF21471E) : Colors.grey[300],
+            color: isSelected ? Color(0xFF2A5D27) : Colors.grey[300],
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
             text,
             style: TextStyle(
-                color: isSelected ? Colors.white : Color(0xFF21471E), fontSize: 12),
+                color: isSelected ? Colors.white : Color(0xFF2A5D27), fontSize: 12),
           ),
         ),
       ),
@@ -120,14 +118,10 @@ class OverviewPage extends StatelessWidget {
           children: [
             Text(
               'YOUR SCORE:',
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF21471E)),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Color(0xFF2A5D27)),
             ),
             SizedBox(height: 8),
-            Text('100/700',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Text('100/700', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400)),
             SizedBox(height: 4),
             Text('Our AI perceives your score based on your history'),
             TextButton(onPressed: () {}, child: Text('Learn More →')),
@@ -152,10 +146,9 @@ class OverviewPage extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 ),
-                Text('View More →',
-                    style: TextStyle(color: Color(0xFF21471E), fontSize: 10))
+                Text('View More →', style: TextStyle(color: Color(0xFF2A5D27), fontSize: 10))
               ],
             ),
             SizedBox(height: 8),
@@ -170,10 +163,11 @@ class OverviewPage extends StatelessWidget {
   }
 
   Widget buildFinancialHealthCard() {
-    double debtToIncome = 42; // 42% debt to income ratio
+    double debtToIncome = 42;
 
     return Card(
       elevation: 3,
+      color: Colors.white,
       margin: EdgeInsets.symmetric(vertical: 8.0),
       child: Padding(
         padding: EdgeInsets.all(16.0),
@@ -185,21 +179,18 @@ class OverviewPage extends StatelessWidget {
               children: [
                 Text(
                   'Financial Health',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 ),
-                Text('View More →',
-                    style: TextStyle(color: Color(0xFF21471E), fontSize: 10))
+                Text('View More →', style: TextStyle(color: Color(0xFF2A5D27), fontSize: 10))
               ],
             ),
             SizedBox(height: 8),
             Text('Debt to Income: ${debtToIncome.toStringAsFixed(0)}%'),
             SizedBox(height: 4),
             LinearProgressIndicator(
-              value: debtToIncome / 100, // Convert percentage to a scale of 0-1
+              value: debtToIncome / 100,
               backgroundColor: Colors.grey[300],
-              color: debtToIncome > 50
-                  ? Colors.red
-                  : Colors.green, // Red if high, green if safe
+              color: debtToIncome > 50 ? Colors.red : Colors.green,
               minHeight: 6,
             ),
             SizedBox(height: 8),
@@ -210,17 +201,15 @@ class OverviewPage extends StatelessWidget {
       ),
     );
   }
-}
-/// **Drawer Function**
+
   Widget _buildDrawer(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          // Drawer Header
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Color(0xFF21471E), // Theme Color
+              color: Color(0xFF2A5D27),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -228,7 +217,7 @@ class OverviewPage extends StatelessWidget {
                 CircleAvatar(
                   radius: 30,
                   backgroundColor: Colors.white,
-                  child: Icon(Icons.person, size: 40, color: Color(0xFF21471E)),
+                  child: Icon(Icons.person, size: 40, color: Color(0xFF2A5D27)),
                 ),
                 SizedBox(height: 10),
                 Text("User Name", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w400)),
@@ -236,28 +225,27 @@ class OverviewPage extends StatelessWidget {
               ],
             ),
           ),
-
-          // Drawer Items
-_buildDrawerItem(Icons.person, "Profile", () {
-             Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ProfilePage()),
-          );
-          }),          _buildDrawerItem(Icons.settings, "Settings", () {}),
+          _buildDrawerItem(Icons.person, "Profile", () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            );
+          }),
+          _buildDrawerItem(Icons.settings, "Settings", () {}),
           _buildDrawerItem(Icons.info, "About", () {}),
           _buildDrawerItem(Icons.help, "Help & Support", () {}),
-          Divider(), // Line Separator
+          Divider(),
           _buildDrawerItem(Icons.logout, "Logout", () {}),
         ],
       ),
     );
   }
 
-  /// **Reusable Drawer Item**
   Widget _buildDrawerItem(IconData icon, String title, VoidCallback onTap) {
     return ListTile(
-      leading: Icon(icon, color: Color(0xFF21471E)),
+      leading: Icon(icon, color: Color(0xFF2A5D27)),
       title: Text(title, style: TextStyle(fontWeight: FontWeight.w400, color: Colors.black87)),
       onTap: onTap,
     );
   }
+}
